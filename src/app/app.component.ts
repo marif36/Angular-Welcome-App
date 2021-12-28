@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Inject } from '@angular/core';
+import { MessageService } from './message.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'welcome-app';
+
+  constructor(@Inject(MessageService) private msgService : MessageService){
+  }
+
+welcomeMsg:string="";
+  
+public getWelcomeMsg(){
+let resp = this.msgService.GetWelcomeMsg();
+resp.subscribe((data) => this.welcomeMsg = data)
+  }
 }
+
